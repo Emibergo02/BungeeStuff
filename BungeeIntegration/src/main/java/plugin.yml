@@ -1,0 +1,17 @@
+name: BungeeIntegration
+main: dev.unnm3d.BungeeIntegration.Main
+version: 1.0
+author: unnm3d
+permissions:
+  bungeeintegration.base:
+   description: Allows base commands
+   default: not op
+  bungeeintegration.admin:
+  description: admin only
+  default: op
+  bungeeintegration.*:
+   description: Wildcard permission
+   default: op
+   children:
+     bungeeintegration.base: true
+     bungeeintegration.admin: true

@@ -1,0 +1,14 @@
+name: SpigotIntegration
+main: dev.unnm3d.SpigotIntegration.Main
+version: 1.0
+author: unnm3d
+commands:
+   getservers:
+      description: This is a demo command.
+      usage: /<command> [player]
+   sendp:
+      description: Send player thru bungeecord.
+      usage: /<command> [player] [server]
+   test:
+      description: test
+      usage: /<command>

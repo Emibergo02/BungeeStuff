@@ -1,0 +1,56 @@
+package dev.unnm3d.SpigotIntegration.ManagePmessage;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.messaging.PluginMessageListener;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
+
+import dev.unnm3d.SpigotIntegration.Main;
+
+public class InPluginMessage implements PluginMessageListener {
+
+	public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+		// TODO Auto-generated method stub
+		if (!channel.equals("BungeeCord")) {
+		      return;
+		    }
+		ByteArrayDataInput in = ByteStreams.newDataInput(message);
+	    String subchannel = in.readUTF();
+	    if (subchannel.equals("GetServers")) {
+	      // Use the code sample in the 'Response' sections below to read
+	      // the data.
+	    	String[] serverList = in.readUTF().split(", ");
+	    	for(String s:serverList) {
+	    		Bukkit.getConsoleSender().sendMessage(s);
+	    	}
+	    }
+	    if (subchannel.equals("GetPlayerInfo")) {
+	    	sendToBungeeCord(player,"ReturnPlayerInfo",playerMessage(player));
+	    }
+		
+		
+	}
+	private String playerMessage(Player p) {
+		String end = new String();
+		
+		return null;
+	}
+	public void sendToBungeeCord(Player p, String channel, String sub){
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(b);
+        try {
+            out.writeUTF(channel);
+            out.writeUTF(sub);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        p.sendPluginMessage(Main.getPlugin(Main.class), "BungeeCord", b.toByteArray());       
+    }
+
+}
