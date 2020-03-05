@@ -1,7 +1,0 @@
-package dev.unnm3d.BungeeIntegration;
-
-import net.md_5.bungee.api.plugin.Listener;
-
-public class Ricezione implements Listener {
-
-}
